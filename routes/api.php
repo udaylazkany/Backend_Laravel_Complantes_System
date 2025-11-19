@@ -20,7 +20,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 Route::post('/Admain/login',[AdmainsController::class,'Login']);
 
-Route::middleware([ 'auth:sanctum','role:Admain'])->group(function () {
+Route::middleware([ 'auth:sanctum'])->group(function () {
 Route::post('/Admain/logout',[AdmainsController::class,'Logout']);
 
 });

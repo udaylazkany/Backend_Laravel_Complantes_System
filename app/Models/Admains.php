@@ -13,17 +13,38 @@ class Admains extends Authenticatable
 
     protected $table = "admains";
 
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
     protected $fillable = [
-        'firstName',
+       
+         'firstName',
         'lastName',
         'email',
         'phoneNumber',
-        'role',
-        'password'
+        'password',
+        
     ];
 
-    public function department()
-    {
-        return $this->hasMany(Departments::class);
-    }
+    /**
+     * The attributes that should be hidden for serialization.
+     *
+     * @var array<int, string>
+     */
+    protected $hidden = [
+        'password',
+        'remember_token',
+    ];
+
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array<string, string>
+     */
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+    ];
 }

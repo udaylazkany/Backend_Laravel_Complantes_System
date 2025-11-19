@@ -14,13 +14,14 @@ return new class extends Migration
     public function up()
     {
         Schema::create('admains', function (Blueprint $table) {
-            $table->id();
-            $table->string('firstname');
-            $table->string('lastname');
+              $table->id();
+            $table->string('firstName');
+            $table->string('lastName');
             $table->string('email')->unique();
-            $table->string('phonenumber',15);
+            $table->timestamp('email_verified_at')->nullable();
+            $table->string('phoneNumber');
             $table->string('password')->nullable();
-            $table->string('role')->default('Admain');
+            $table->rememberToken();
             $table->timestamps();
         });
     }

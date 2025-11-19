@@ -18,11 +18,7 @@ class AdmainsController extends Controller
         return response()->json(['message'=>'Invalid credentials'],401);
     }
     $admain=Auth::user();
-    if($admain->role !=='Admain')
-    {
-        Auth::logout();
-        return response()->json(['message'=> 'Access denied. Only General Manager can login'],status: 403);
-    }
+   
     $token =$admain->createToken('auth_token')->plainTextToken;
     return response()->json(['message'=> 'Login successful','Admain'=>$admain,'token'=>$token],200);
    }

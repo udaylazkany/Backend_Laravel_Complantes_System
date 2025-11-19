@@ -22,7 +22,7 @@ class AdminSeeder extends Seeder
     'email'=>'ulazkany@gmail.com',
     'phoneNumber'=>'0988704367',
     'password'=> Hash::make('hadel98olamath'),
-    'role'=>'Admain'
+    
 ]);
     
    
