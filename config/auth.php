@@ -14,7 +14,7 @@ return [
     */
 
     'defaults' => [
-        'guard' => 'web',
+        'guard' => 'admin',
         'passwords' => 'users',
     ],
 
@@ -35,12 +35,7 @@ return [
     |
     */
 
-    'guards' => [
-        'web' => [
-            'driver' => 'session',
-            'provider' => 'users',
-        ],
-    ],
+ 
 
     /*
     |--------------------------------------------------------------------------
@@ -58,18 +53,52 @@ return [
     | Supported: "database", "eloquent"
     |
     */
+    'guards' => [
+           'web' => [
+        'driver' => 'session',
+        'provider' => 'users',
+    ],
+    'admin' => [
+        'driver' => 'session',
+        'provider' => 'admins',
+    ],
+    'citizen' => [
+        'driver' => 'session',
+        'provider' => 'citizens',
+    ],
+    'employee' => [
+        'driver' => 'session',
+        'provider' => 'employees',
+    ],
+],
 
-    'providers' => [
-        'users' => [
-            'driver' => 'eloquent',
-            'model' =>  App\Models\Admains::class,
-        ],
+'providers' => [
+     'users' => [
+        'driver' => 'eloquent',
+        'model' => App\Models\User::class,
+    ],
+    'admins' => [
+        'driver' => 'eloquent',
+        'model' => App\Models\Admains::class,
+    ],
+    'citizens' => [
+        'driver' => 'eloquent',
+        'model' => App\Models\Citzens::class,
+    ],
+    'employees' => [
+        'driver' => 'eloquent',
+        'model' => App\Models\Employees::class,
+    ],
+],
+
+
+    
 
         // 'users' => [
         //     'driver' => 'database',
         //     'table' => 'users',
         // ],
-    ],
+   
 
     /*
     |--------------------------------------------------------------------------

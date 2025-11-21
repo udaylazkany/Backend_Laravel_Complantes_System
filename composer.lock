@@ -1299,7 +1299,7 @@
                     "email": "taylor@laravel.com"
                 }
             ],
-            "description": "Laravel Sanctum provides a featherweight authentication system for SPAs and simple APIs.",
+            "description": "Laravel sanctumprovides a featherweight authentication system for SPAs and simple APIs.",
             "keywords": [
                 "auth",
                 "laravel",

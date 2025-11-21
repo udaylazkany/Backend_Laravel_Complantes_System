@@ -3,12 +3,22 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 
-class Citzens extends Model
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use app\Models\complants;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
+use Override;
+
+class Citzens extends Authenticatable
 {
-    use HasFactory;
-    protected $fillable = ['firstName','lastName','email','CardId','Brithday','phoneNumber'];
+    
+
+    protected $table = 'citizens';
+
+
+    use HasFactory , HasApiTokens,Notifiable;
+    protected $fillable = ['firstName','lastName','email','CardId','Birthday','phoneNumber','password'];
     public function complants()
     {
         return $this->belongsToMany(complants::class,'complants__citzens');

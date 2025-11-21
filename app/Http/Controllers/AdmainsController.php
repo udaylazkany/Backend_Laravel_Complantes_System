@@ -13,20 +13,21 @@ class AdmainsController extends Controller
    {
     $credentails=$request->validate(['email'=>'required|email','password'=> 'required']);
 
-    if(!Auth::attempt($credentails))
-    {
-        return response()->json(['message'=>'Invalid credentials'],401);
+  if (!Auth::guard('admin')->attempt($credentails)) {
+        return response()->json(['message' => 'Invalid credentials'], 401);
     }
-    $admain=Auth::user();
-   
+
+    $admain = Auth::guard('admin')->user();
     $token =$admain->createToken('auth_token')->plainTextToken;
-    return response()->json(['message'=> 'Login successful','Admain'=>$admain,'token'=>$token],200);
+    return response()->json(['message'=> 'Login successful','Admain'=>$admain,'token'=>$token],201);
    }
    public function Logout(Request $request)
    {
-    $request->user()->tokens()->delete();
-    return response()->json(['message' => 'Logged out successfully']);
+      $user =$request->user();
+      $user->tokens()->delete();
+      return response()->json(['message'=> 'logout Successful'],201);
    }
+   
    
 }
 
