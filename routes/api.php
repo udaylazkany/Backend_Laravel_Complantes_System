@@ -41,7 +41,7 @@ Route::middleware([ 'auth:sanctum','role:Employee'])->group(function () {
 });
 
 Route::prefix('Citizen')->middleware([ 'auth:sanctum',])->group(function () {
-    Route::post('Citizen/logout',[CitzensController::class,'logout']);
+    Route::post('/logout',[CitzensController::class,'logout']);
 
     
 });
