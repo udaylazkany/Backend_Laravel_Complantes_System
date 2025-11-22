@@ -8,6 +8,7 @@ Use App\Models\Admain;
 
 class Departments extends Model
 {
+    protected $table="departments";
     use HasFactory;
     protected $fillable = ['name_department','manager_id'] ;
     public function admain()

@@ -19,12 +19,16 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+
 Route::post('citizen/create',[CitzensController::class,'store']);
 Route::post('/Admain/login',[AdmainsController::class,'Login']);
 Route::post('/Citizen/login',[CitzensController::class,'Login']);
 
-Route::middleware([ 'auth:sanctum'])->group(function () {
-Route::post('/Admain/logout',[AdmainsController::class,'Logout']);
+Route::prefix('Admain')->middleware([ 'auth:sanctum'])->group(function () {
+    Route::post('/Department/Create',[AdmainsController::class,'Create_Department']);
+    Route::get('/Department/Show',[AdmainsController::class,'Show_Department']);
+    Route::post('/logout',[AdmainsController::class,'Logout']);
 
 });
 Route::middleware([ 'auth:sanctum','role:Admain_Department'])->group(function () {
@@ -36,7 +40,7 @@ Route::middleware([ 'auth:sanctum','role:Employee'])->group(function () {
     
 });
 
-Route::middleware([ 'auth:sanctum',])->group(function () {
+Route::prefix('Citizen')->middleware([ 'auth:sanctum',])->group(function () {
     Route::post('Citizen/logout',[CitzensController::class,'logout']);
 
     

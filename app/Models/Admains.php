@@ -47,4 +47,8 @@ class Admains extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    public function departments()
+{
+    return $this->hasMany(Department::class, 'manager_id');
+}
 }

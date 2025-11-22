@@ -59,11 +59,6 @@ return response()->json([
     
 }
 
-public function logout(Request $request) 
-{
-  $token =$request->user()->tokens()->delete();
-  return response()->json(['message'=>'logout Successfuly']);
-}
 public function Login(Request $request)
 {
   $credentails =$request->validate(['email'=>'required|email','password'=> 'required']);
@@ -74,5 +69,26 @@ public function Login(Request $request)
     $Citizen = Auth::guard('citizen')->user();
   $token =$Citizen->createToken('auth_token')->plainTextToken;
   return response()->json(["message"=>"login Successfully","Citizen"=>$Citizen,"token"=>$token],201);
+}
+
+public function logout(Request $request) 
+{
+
+  try{
+    $user =$request->user();
+  if($user)
+  {
+    $user->tokens()->delete();
+    return response()->json(['message'=>'logout Successfuly'],201);
+  }
+    return response()->json(['message'=>'No active session'],203);
+  
+
+  }
+  catch(Exception $e)
+  {
+    return response()->json(['message'=>'Excption'+$e]);
+  }
+  
 }
 }
