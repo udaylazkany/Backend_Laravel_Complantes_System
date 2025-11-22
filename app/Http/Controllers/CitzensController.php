@@ -6,6 +6,7 @@ use App\Models\Citzens;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Departments;
 
 
 class CitzensController extends Controller
@@ -17,7 +18,7 @@ class CitzensController extends Controller
     'firstName'   => 'required|string|max:255',
     'lastName'    => 'required|string|max:255',
     'email'       => 'required|email|unique:citizens,email',
-    'phoneNumber' => 'required|string|max:10|unique:citizens,phoneNumber',
+    
     'CardId'      => 'required|string|unique:citizens,CardId',
     'Birthday'    => 'required|date',
     'password'    => 'required|min:6',
@@ -27,7 +28,7 @@ class CitzensController extends Controller
     'email.required'     => 'Email is required ',
     'email.email'        => 'Should Enter email Coreccted',
     'email.unique'       => 'Email is found befor',
-    'phoneNumber.unique' => 'Phone Number is used befor ',
+    
     'CardId.unique'      => 'Card id is found ',
     'Birthday.required'  => 'Birthday is required',
     'Birthday.date'      => 'Should Enter a corected Date',
@@ -39,7 +40,7 @@ $Citzen = Citzens::create([
     'firstName'   => $validated['firstName'],
     'lastName'    => $validated['lastName'], 
     'email'       => $validated['email'],
-    'phoneNumber' => $validated['phoneNumber'],
+   
     'CardId'      => $validated['CardId'],
     'Birthday'    => $validated['Birthday'],
     'password'    => Hash::make($validated['password']),
@@ -91,4 +92,9 @@ public function logout(Request $request)
   }
   
 }
+public function Show_Department()
+   {
+      $Deprtments=Departments::select('name_department')->get();
+      return response()->json(['Department'=>$Deprtments],201);
+   }
 }

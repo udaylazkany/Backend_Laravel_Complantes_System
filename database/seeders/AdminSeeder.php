@@ -20,7 +20,7 @@ class AdminSeeder extends Seeder
     $admains = Admains::create(['firstName'=>'uday',
     'lastName'=> 'lazkany', 
     'email'=>'ulazkany@gmail.com',
-    'phoneNumber'=>'0988704367',
+    
     'password'=> Hash::make('hadel98olamath'),
     
 ]);

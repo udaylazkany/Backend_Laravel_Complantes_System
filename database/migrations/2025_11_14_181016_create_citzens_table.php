@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('password')->nullable();
             $table->unsignedBigInteger('CardId')->unique();
             $table->date('Birthday');
-            $table->string('phoneNumber',10);
+            
             $table->timestamps();
         });
     }

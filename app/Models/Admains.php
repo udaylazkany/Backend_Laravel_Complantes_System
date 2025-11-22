@@ -24,7 +24,7 @@ class Admains extends Authenticatable
          'firstName',
         'lastName',
         'email',
-        'phoneNumber',
+        
         'password',
         
     ];
