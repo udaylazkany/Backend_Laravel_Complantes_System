@@ -18,7 +18,7 @@ class Citzens extends Authenticatable
 
 
     use HasFactory , HasApiTokens,Notifiable;
-    protected $fillable = ['firstName','lastName','email','CardId','Birthday','password'];
+    protected $fillable = ['firstName','lastName','email','cardId','birthday','password'];
     public function complants()
     {
         return $this->belongsToMany(complants::class,'complants__citzens');

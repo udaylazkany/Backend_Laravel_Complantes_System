@@ -19,8 +19,8 @@ return new class extends Migration
             $table->string('lastName');
             $table->string('email')->unique();
             $table->string('password')->nullable();
-            $table->unsignedBigInteger('CardId')->unique();
-            $table->date('Birthday');
+            $table->unsignedBigInteger('cardId')->unique();
+            $table->date('birthday');
             
             $table->timestamps();
         });

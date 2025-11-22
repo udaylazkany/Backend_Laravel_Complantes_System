@@ -19,8 +19,8 @@ class CitzensController extends Controller
     'lastName'    => 'required|string|max:255',
     'email'       => 'required|email|unique:citizens,email',
     
-    'CardId'      => 'required|string|unique:citizens,CardId',
-    'Birthday'    => 'required|date',
+    'cardId'      => 'required|string|unique:citizens,cardId',
+    'birthday'    => 'required|date',
     'password'    => 'required|min:6',
 ], [
     'firstName.required' => 'First name is required',
@@ -29,9 +29,9 @@ class CitzensController extends Controller
     'email.email'        => 'Should Enter email Coreccted',
     'email.unique'       => 'Email is found befor',
     
-    'CardId.unique'      => 'Card id is found ',
-    'Birthday.required'  => 'Birthday is required',
-    'Birthday.date'      => 'Should Enter a corected Date',
+    'cardId.unique'      => 'Card id is found ',
+    'birthday.required'  => 'birthday is required',
+    'birthday.date'      => 'Should Enter a corected Date',
     'password.required'  => 'Password is required',
     'password.min'       => 'Password should be biger',
 ]);
@@ -41,8 +41,8 @@ $Citzen = Citzens::create([
     'lastName'    => $validated['lastName'], 
     'email'       => $validated['email'],
    
-    'CardId'      => $validated['CardId'],
-    'Birthday'    => $validated['Birthday'],
+    'cardId'      => $validated['cardId'],
+    'birthday'    => $validated['birthday'],
     'password'    => Hash::make($validated['password']),
 ]);
 
