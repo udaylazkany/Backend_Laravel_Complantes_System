@@ -10,10 +10,13 @@ return new class extends Migration
     {
         Schema::create('complants', function (Blueprint $table) {
             $table->id();
-            $table->string('name_complants');
+            $table->string('name_Complants')->nullable();
             $table->string('description', 100);
-            $table->string('file_path')->nullable();
-            $table->string('image_path')->nullable();
+            $table->string('file_Path');
+            $table->string('image_Path');
+            $table->foreignId('department_id')
+            ->constrained('departments')   
+            ->onDelete('restrict');
             $table->timestamps();
         });
     }

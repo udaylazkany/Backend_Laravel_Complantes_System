@@ -20,4 +20,8 @@ class Departments extends Model
     {
         return $this->hasMany(Employees::class);
     }
+    public function complants()
+    {
+        return $this->hasMany(complants::class);
+    }
 }

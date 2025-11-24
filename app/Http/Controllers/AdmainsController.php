@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Admains;
+use App\Models\Area;
 use App\Models\Departments; 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -69,5 +69,17 @@ class AdmainsController extends Controller
    {
       $Deprtments=Departments::all();
       return response()->json(['Department'=>$Deprtments],201);
+   }
+   public function Create_Location(Request $request)
+   {
+    $validated = $request->validate([
+        'Location'=>'required|string'
+    ]);
+    $location=Area::create(['Location'=>$validated['Location']]);
+    return response()->json([
+        'status' => true,
+        'message' => 'Location added successfully!',
+        'data' => $location
+    ], 201);
    }
 }

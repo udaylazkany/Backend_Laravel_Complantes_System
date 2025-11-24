@@ -13,11 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('departments', function (Blueprint $table) {
-            $table->id();
-            $table->string('name_department')->unique();
-            $table->foreignId('manager_id')
-            ->constrained('admains')   
+        Schema::create('media', function (Blueprint $table) {
+           
+              $table->id();
+            $table->string('Picture');
+            $table->string('file');
+            $table->foreignId('complants_Id')
+            ->constrained('complants')
             ->onDelete('restrict');
             $table->timestamps();
         });
@@ -30,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('departments');
+        Schema::dropIfExists('media');
     }
 };
