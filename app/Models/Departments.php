@@ -22,6 +22,6 @@ class Departments extends Model
     }
     public function complants()
     {
-        return $this->hasMany(complants::class);
+        return $this->hasMany(complants::class,'department_id');
     }
 }

@@ -4,6 +4,7 @@ use App\Http\Controllers\AdmainsController;
 use App\Http\Controllers\CitzensController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ComplantsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,7 +44,7 @@ Route::middleware([ 'auth:sanctum','role:Employee'])->group(function () {
 
 Route::prefix('Citizen')->middleware([ 'auth:sanctum',])->group(function () {
     Route::get('/Show_Department_name',[CitzensController::class,'Show_Department']);
-   /// Rout::post('/Add_Complants',[ComplantsController::class,'Create']);
+   Route::post('/Add_Complants',[ComplantsController::class,'Create']);
     Route::post('/logout',[CitzensController::class,'logout']);
 
     

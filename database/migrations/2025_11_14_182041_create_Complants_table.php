@@ -12,8 +12,8 @@ return new class extends Migration
             $table->id();
             $table->string('name_Complants')->nullable();
             $table->string('description', 100);
-            $table->string('file_Path');
-            $table->string('image_Path');
+            $table->string('file_Path')->nullable(true);   
+            $table->string('image_Path')->nullable(true);
             $table->foreignId('department_id')
             ->constrained('departments')   
             ->onDelete('restrict');

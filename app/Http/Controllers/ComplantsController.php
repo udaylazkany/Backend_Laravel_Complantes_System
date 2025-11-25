@@ -12,16 +12,18 @@ class ComplantsController extends Controller
         $validated= $request->validate([
             'name_complants'=>'required|string',
             'description'=>'required|string|min:5',
-            'image_path' => 'nullable|mimes:jpg,jpeg,png,pdf|max:2048', 
-            'file_path'=>'nullable|mimes:pdf|max:5120'
+            'image_Path' => 'nullable|mimes:jpg,jpeg,png|max:2048', 
+            'file_Path'=>'nullable|mimes:pdf|max:5120',
+            'department_id' => 'required|exists:departments,id'
+
             
         ],[
             'name_complants.required'=> 'Please enter the complaint name',
             'description.min'=> 'Description must be at least 5 characters',
             'description.required'=> 'Please enter a description',
-            'image_path.mimes'=>'Image must be jpg, jpeg, png',
-            'image_path.max'=> 'Image size must not exceed 2MB',
-            'file_path.max'=>'File size must not exceed 5MB',
+            'image_Path.mimes'=>'Image must be jpg, jpeg, png',
+            'image_Path.max'=> 'Image size must not exceed 2MB',
+            'file_Path.max'=>'File size must not exceed 5MB',
             'file_path.mimes'=>'File must be a PDF'
         ]);
         if($request->hasFile('image_path'))
@@ -32,8 +34,16 @@ class ComplantsController extends Controller
         {
             $validated['file_path']=$request->file('file_path')->store('complants/file','public');
         }
-        $department = Departments::find($request->department_id);
+        $department = Departments::find($validated['department_id']);
         $complants = $department->complants()->create($validated);
-        return response()->json(['status'=>true, 'message' => 'Complaint added successfully!','data'=>$complants],201);
+        if(!empty($validated['citizen_id']))
+        {
+            $complants->citzens()->sync($validated['citizen_id']);
+        }
+        if(!empty($validated['Area_id']))
+        {
+            $complants->area()->sync($validated['Area_id']);
+        }
+        return response()->json(['status'=>true, 'message' => 'Complaint added successfully!','data'=>$complants->load('Citzens','Area','department')],201);
     }
 }
