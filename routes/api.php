@@ -42,7 +42,7 @@ Route::middleware([ 'auth:sanctum','role:Employee'])->group(function () {
     
 });
 
-Route::prefix('Citizen')->middleware([ 'auth:sanctum',])->group(function () {
+Route::prefix('citizen')->middleware([ 'auth:sanctum',])->group(function () {
     Route::get('/Show_Department_name',[CitzensController::class,'Show_Department']);
    Route::post('/Add_Complants',[ComplantsController::class,'Create']);
     Route::post('/logout',[CitzensController::class,'logout']);
