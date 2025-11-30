@@ -16,7 +16,7 @@ class complants extends Model
     } 
     public function area()
     {
-      return  $this->belongsToMany(Area::class,'complants__areas');
+      return  $this->belongsToMany(Area::class,'complants__areas','Complants_id',relatedPivotKey: 'Area_id');
     }
     public function department()
     {

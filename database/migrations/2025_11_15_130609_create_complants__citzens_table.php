@@ -21,9 +21,6 @@ return new class extends Migration
             $table->foreignId('Complants_id')
             ->constrained('complants')
             ->onDelete('restrict');
-            $table->foreignId('Employees_id')
-            ->constrained('employees')
-            ->onDelete('restrict');
             $table->timestamps();
         });
     }

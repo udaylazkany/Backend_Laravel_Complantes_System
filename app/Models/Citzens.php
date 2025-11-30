@@ -21,6 +21,6 @@ class Citzens extends Authenticatable
     protected $fillable = ['firstName','lastName','email','cardId','birthday','password'];
     public function complants()
     {
-        return $this->belongsToMany(complants::class,'complants__citzens');
+        return $this->belongsToMany(complants::class,'complants__citzens','citizen_id','Complants_id');
     }
 }

@@ -14,7 +14,11 @@ class ComplantsController extends Controller
             'description'=>'required|string|min:5',
             'image_Path' => 'nullable|mimes:jpg,jpeg,png|max:2048', 
             'file_Path'=>'nullable|mimes:pdf|max:5120',
-            'department_id' => 'required|exists:departments,id'
+            'department_id' => 'required|exists:departments,id',
+            'citizen_id'     => 'nullable|array',
+            'Area_id' => 'nullable|array',
+            
+
 
             
         ],[
@@ -36,14 +40,32 @@ class ComplantsController extends Controller
         }
         $department = Departments::find($validated['department_id']);
         $complants = $department->complants()->create($validated);
-        if(!empty($validated['citizen_id']))
-        {
-            $complants->citzens()->sync($validated['citizen_id']);
-        }
-        if(!empty($validated['Area_id']))
-        {
-            $complants->area()->sync($validated['Area_id']);
-        }
-        return response()->json(['status'=>true, 'message' => 'Complaint added successfully!','data'=>$complants->load('Citzens','Area','department')],201);
+        
+        
+        if (!empty($validated['citizen_id'])) {
+    $complants->citzens()->attach($validated['citizen_id']);
+}
+
+if (!empty($validated['Area_id'])) {
+    $complants->area()->attach($validated['Area_id']);
+}
+
+        return response()->json(['status'=>true, 'message' => 'Complaint added successfully!','data'=>[[
+        'id'          => $complants->id,
+        'title'       => $complants->name_complants,
+        'description' => $complants->description,
+        'image'       => $complants->image_path,
+        'file'        => $complants->file_path,
+        'created_at'  => $complants->created_at,
+        'updated_at'  => $complants->updated_at,
+    ],
+    'department' => [
+        'id'   => $complants->department->id,
+        'name' => $complants->department->name_department,
+        'manager_id' => $complants->department->manager_id,
+    ],
+    'relations' => [
+        'citzens' => $complants->citzens,
+        'areas'   => $complants->area]]],201);
     }
 }

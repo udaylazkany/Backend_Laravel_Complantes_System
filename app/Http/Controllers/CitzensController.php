@@ -51,8 +51,11 @@ $token = $Citzen->createToken('auth_token')->plainTextToken;
 
 return response()->json([
   'message'=>'register and  login successfuly',
-  'Citzen'=>$Citzen,
+  'data'=>$Citzen,
   'token'=>$token,
+  'status'=>201
+  
+  
 ], 201);
 
     
@@ -69,7 +72,7 @@ public function Login(Request $request)
 
     $Citizen = Auth::guard('citizen')->user();
   $token =$Citizen->createToken('auth_token')->plainTextToken;
-  return response()->json(["message"=>"login Successfully","Citizen"=>$Citizen,"token"=>$token],201);
+  return response()->json(["message"=>"login Successfully","data"=>$Citizen,"token"=>$token],201);
 }
 
 public function logout(Request $request) 
@@ -80,7 +83,7 @@ public function logout(Request $request)
   if($user)
   {
     $user->tokens()->delete();
-    return response()->json(['message'=>'logout Successfuly'],201);
+    return response()->json(['data'=>'logout Successfuly'],201);
   }
     return response()->json(['message'=>'No active session'],203);
   
@@ -95,6 +98,6 @@ public function logout(Request $request)
 public function Show_Department()
    {
       $Deprtments=Departments::select('name_department')->get();
-      return response()->json(['Department'=>$Deprtments],201);
+      return response()->json(['data'=>$Deprtments],201);
    }
 }

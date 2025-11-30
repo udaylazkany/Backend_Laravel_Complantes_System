@@ -6,5 +6,5 @@ use Illuminate\Http\Request;
 
 class EmployeesController extends Controller
 {
-    //
+    public $table="employees";
 }
