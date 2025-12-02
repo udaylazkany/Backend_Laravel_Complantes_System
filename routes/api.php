@@ -24,7 +24,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::post('citizen/create',[CitzensController::class,'store']);
 Route::post('/Admain/login',[AdmainsController::class,'Login']);
-Route::post('/Citizen/login',[CitzensController::class,'Login']);
+Route::post('/citizen/login',[CitzensController::class,'Login']);
 
 Route::prefix('Admain')->middleware([ 'auth:sanctum'])->group(function () {
     Route::post('/Department/Create',[AdmainsController::class,'Create_Department']);

@@ -17,7 +17,7 @@ class AdmainsController extends Controller
       ]);
 
       if (!Auth::guard('admin')->attempt($credentails)) {
-          return response()->json(['message' => 'Invalid credentials'], 401);
+          return response()->json(['message' => 'Invalid credentials','status'=>401], 401);
       }
 
       $admain = Auth::guard('admin')->user();
@@ -26,7 +26,7 @@ class AdmainsController extends Controller
       return response()->json([
           'message'=> 'Login successful',
           'Admain' => $admain,
-          'token'  => $token
+          'token'  => $token,'status'=>201
       ],201);
    }
 
@@ -36,9 +36,9 @@ class AdmainsController extends Controller
           $user = $request->user();
           if ($user) {
               $user->tokens()->delete();
-              return response()->json(['message'=> 'Logout Successful'],201);
+              return response()->json(['message'=> 'Logout Successful','status'=>201],201);
           }
-          return response()->json(['message'=> 'No active session'],203);
+          return response()->json(['message'=> 'No active session','status'=>203],203);
       } catch(\Exception $e) {
           return response()->json(['message'=> 'Exception: '.$e->getMessage()]);
       }
@@ -62,13 +62,13 @@ class AdmainsController extends Controller
 
       return response()->json([
           'message'=> 'Department created successfully',
-          'department' => $department
+          'department' => $department,'status'=>201
       ],201);
    }
    public function Show_Department()
    {
       $Deprtments=Departments::all();
-      return response()->json(['Department'=>$Deprtments],201);
+      return response()->json(['Department'=>$Deprtments,'status'=>201],201);
    }
    public function Create_Location(Request $request)
    {
@@ -77,9 +77,10 @@ class AdmainsController extends Controller
     ]);
     $location=Area::create(['Location'=>$validated['Location']]);
     return response()->json([
-        'status' => true,
+        
         'message' => 'Location added successfully!',
-        'data' => $location
+        'data' => $location,
+        'status'=>201
     ], 201);
    }
 }

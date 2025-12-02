@@ -50,7 +50,7 @@ if (!empty($validated['Area_id'])) {
     $complants->area()->attach($validated['Area_id']);
 }
 
-        return response()->json(['status'=>true, 'message' => 'Complaint added successfully!','data'=>[[
+        return response()->json(['status'=>201, 'message' => 'Complaint added successfully!','data'=>[[
         'id'          => $complants->id,
         'title'       => $complants->name_complants,
         'description' => $complants->description,
