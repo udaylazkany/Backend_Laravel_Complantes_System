@@ -47,12 +47,13 @@ $Citzen = Citzens::create([
 ]);
 
 $token = $Citzen->createToken('auth_token')->plainTextToken;
+$CitzenData=$Citzen->toArray();
+$CitzenData['token'] = $token;
 
 
 return response()->json([
   'message'=>'register and  login successfuly',
-  'data'=>$Citzen,
-  'token'=>$token,
+  'data'=>$CitzenData,
   'status'=>201
   
   
@@ -72,7 +73,9 @@ public function Login(Request $request)
 
     $Citizen = Auth::guard('citizen')->user();
   $token =$Citizen->createToken('auth_token')->plainTextToken;
-  return response()->json(["message"=>"login Successfully","data"=>$Citizen,"token"=>$token,'status'=>201],201);
+  $citizenData=$Citizen->toArray();
+  $citizenData['token']=$token;
+  return response()->json(["message"=>"login Successfully","data"=>$citizenData,"token"=>$token,'status'=>201],201);
 }
 
 public function logout(Request $request) 
