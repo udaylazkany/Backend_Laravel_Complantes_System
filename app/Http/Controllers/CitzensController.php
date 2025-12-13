@@ -19,7 +19,7 @@ class CitzensController extends Controller
     'lastName'    => 'required|string|max:255',
     'email'       => 'required|email|unique:citizens,email',
     
-    'cardId'      => 'required|string|unique:citizens,cardId',
+    'cardId'      => 'required|string|size:11|unique:citizens,cardId',
     'birthday'    => 'required|date',
     'password'    => 'required|min:6',
 ], [
