@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Area;
 use App\Models\Departments; 
+use App\Models\Employees;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -83,4 +84,40 @@ class AdmainsController extends Controller
         'status'=>201
     ], 201);
    }
+public function Show_Area()
+   {
+      $Area=Area::all();
+      return response()->json(['Area'=>$Area,'status'=>201],201);
+   }
+   public function add_employee(Request $request)
+   {
+    $validated=$request->validate([
+        'firstname'=>'required|string',
+        'lastname'=>'required|string',
+        'email' => 'required|email|unique:employees,email',
+        'phone_number'=>'required|string|size:10',
+        'employee_code'=>'required|string',
+        'department_id' => 'required|exists:departments,id',
+        'is_department_manager'=>'nullable|boolean'
+
+]);
+$add_employee=Employees::create(['firstname'=>$validated['firstname'],
+'lastname'=>$validated['lastname'],
+'email'=>$validated['email'],
+'phone_number'=>$validated['phone_number'],
+'employee_code'=>$validated['employee_code'],
+'department_id'=>$validated['department_id'],
+'is_department_manager'=>$validated['is_department_manager'] ?? false
+
+
+]);
+    return response()->json([
+        
+        'message' => 'Employee added successfully!',
+        'data' => $add_employee,
+        'status'=>201
+    ], 201);
+
+   }
+
 }

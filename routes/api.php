@@ -22,6 +22,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 
+
+
+
 Route::post('citizen/create',[CitzensController::class,'store']);
 Route::post('/Admain/login',[AdmainsController::class,'Login']);
 Route::post('/citizen/login',[CitzensController::class,'Login']);
@@ -30,6 +33,8 @@ Route::prefix('Admain')->middleware([ 'auth:sanctum'])->group(function () {
     Route::post('/Department/Create',[AdmainsController::class,'Create_Department']);
     Route::get('/Department/Show',[AdmainsController::class,'Show_Department']);
     Route::post('/add_area',[AdmainsController::class,'Create_Location']);
+    Route::get('/Area/Show',[AdmainsController::class,'Show_Area']);
+    Route::post('/add_employee',[AdmainsController::class,'add_employee']);
     Route::post('/logout',[AdmainsController::class,'Logout']);
 
 });

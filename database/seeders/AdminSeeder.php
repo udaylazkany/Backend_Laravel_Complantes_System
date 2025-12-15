@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\Admin;
+use App\Models\Admains;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -18,7 +18,7 @@ class AdminSeeder extends Seeder
      */
      public function run():void
     {
-    $admins = Admin::create(['firstName'=>'uday',
+    $admins = Admains::create(['firstName'=>'uday',
     'lastName'=> 'lazkany', 
     'email'=>'ulazkany@gmail.com',
     
